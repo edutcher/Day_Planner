@@ -37,3 +37,122 @@
     color: black;
     text-shadow: 3px 3px var(--theme-color);
 }
+
+.sidenav {
+    z-index: 2;
+}
+
+.user-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#calIcon {
+    text-shadow: 2px 2px var(--theme-color);
+    transform: scale(4) translateY(5px);
+}
+
+#workingDate {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-shadow: 2px 2px var(--theme-color);
+}
+
+#sidebarTopBackground {
+    top: -80px;
+    left: -100px;
+}
+
+.hidden {
+    display: none;
+}
+
+.calOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: grey;
+    opacity: .15;
+}
+
+.sidenav li {
+    transition: 0.2s;
+    position: relative;
+}
+
+.sidenav li:hover {
+    box-shadow: 3px 3px var(--theme-color);
+    transform: translateY(-5px);
+}
+
+.eventStyle {
+    background-color: var(--theme-color);
+    font-family: 'Noto Sans JP', 'sans-serif';
+    font-size: 16px;
+    padding: 3px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.modal {
+    background-image: url(./cherry3.jpg);
+    background-position: 30% 30%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.modal h3 {
+    text-shadow: 2px 2px var(--theme-color);
+}
+
+.modal option {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#titleInput {
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 2px 2px var(--theme-color);
+}
+
+#eventDesc {
+    font-size: 20px;
+    text-shadow: 2px 2px var(--theme-color);
+}
+
+footer ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer ul li {
+    margin-left: 110px;
+    transform: scale(2.5) translateY(-10px);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+footer ul li:hover {
+    transform: scale(2.5) translateY(-17px);
+    text-shadow: 2px 2px var(--theme-color);
+}
+
+.page-footer {
+    background-color: var(--theme-color);
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 100;
+}
