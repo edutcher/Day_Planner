@@ -4,7 +4,9 @@ var curHour = moment().hour();
 var prevHour = moment().hour();
 var allEvents = [];
 
-localStorage.setItem("allEvents", JSON.stringify(allEvents));
+if (localStorage.getItem("allEvents") == null) {
+    localStorage.setItem("allEvents", JSON.stringify(allEvents));
+}
 
 var curTheme = 1;
 
