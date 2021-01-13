@@ -13,7 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rome/2.1.22/rome.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.js"></script>
     <link rel="stylesheet" href="./assets/style.css">
-    <link rel="stylesheet" href="assets/style.css">
     <title>Day Planner</title>
 </head>
 
@@ -105,6 +104,52 @@
                     <div class="calOver calOverlay" data-hour="17"> </div> </a>
             </li>
         </ul>
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h3 class="center-align">Add Event</h3>
+                <div class="row">
+                    <div class="col s1"></div>
+                    <div class="input-field col s2 text-darken-3 bold">
+                        <select id="hourSel" class="text-darken-3 bold">
+                        <option id="sel9" class="text-darken-3  bold" value="9">9 AM</option>
+                        <option id="sel10" class="text-darken-3  bold" value="10">10 AM</option>
+                        <option id="sel11" class="text-darken-3  bold" value="11">11 AM</option>
+                        <option id="sel12" class="text-darken-3  bold" value="12">12 PM</option>
+                        <option id="sel13" class="text-darken-3  bold" value="13">1 PM</option>
+                        <option id="sel14" class="text-darken-3  bold" value="14">2 PM</option>
+                        <option id="sel15" class="text-darken-3  bold" value="15">3 PM</option>
+                        <option id="sel16" class="text-darken-3  bold" value="16">4 PM</option>
+                        <option id="sel17" class="text-darken-3  bold" value="17">5 PM</option>
+                        </select>
+                        <label>Hour</label>
+                    </div>
+                    <div class="col s1"></div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">title</i>
+                        <input id="titleInput" type="text">
+                        <label id="titleLabel" for="titleInput">Title</label>
+                    </div>
+                    <div class="col s2"></div>
+                </div>
+                <div class="row">
+                    <br>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">text_fields</i>
+                        <textarea id="eventDesc" class="materialize-textarea"></textarea>
+                        <label id="descLabel" for="eventDesc">Description</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <br><br><br><br><br><br><br>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a id="delBtn" href="javascript:delEvent()" class="modal-close btn red hidden">Delete</a>
+                <a id="saveBtn" href="javascript:saveEvent()" class="modal-close waves-effect waves-green btn green">Save</a>
+            </div>
+        </div>
     </main>
     <footer class="page-footer">
         <div class="container">
