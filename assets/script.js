@@ -3,6 +3,9 @@ const workDate = $('#workingDate');
 var curHour = moment().hour();
 var prevHour = moment().hour();
 var allEvents = [];
+
+localStorage.setItem("allEvents", JSON.stringify(allEvents));
+
 var curTheme = 1;
 
 const themes = [{
@@ -76,6 +79,7 @@ function checkCalOverlays() {
 
 function loadCal() {
     checkCalOverlays()
+
 
     if (localStorage.getItem("allEvents") === null) {
         for (var i = 0; i <= 9; i++) {
