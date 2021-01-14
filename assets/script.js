@@ -8,10 +8,6 @@ var curHour = moment().hour();
 var prevHour = moment().hour();
 var allEvents = [];
 
-if (localStorage.getItem("allEvents") == null) {
-    localStorage.setItem("allEvents", JSON.stringify(allEvents));
-}
-
 var curTheme = 1;
 
 const themes = [{
@@ -52,7 +48,7 @@ function startClock() {
 
 function checkCalOverlays() {
     curHour = moment().hour();
-    //curHour = 12;
+    // curHour = 12;
 
     calOvers.each(function(i, el) {
         if ($(this).data("hour") < curHour) {
@@ -78,25 +74,24 @@ function loadCal() {
 
 
     if (localStorage.getItem("allEvents") === null) {
-        for (var i = 0; i <= 9; i++) {
-            $(".eventTitle")[i].textContent = '';
-            $('.hour')[i].dataset.hasEvent = 'false';
-            $('.calOver')[i].dataset.hasEvent = 'false';
-            $('.eventTitle')[i].dataset.hasEvent = 'false';
-            $('.eventTitle')[i].classList.remove('eventStyle');
-        }
+
+        titles.text('');
+        hours.data('event', false);
+        calOvers.data('event', false);
+        titles.data('event', false);
+        titles.removeClass('eventStyle');
         return
     }
 
     allEvents = JSON.parse(localStorage.getItem("allEvents"));
 
     for (var i = 0; i < allEvents.length; i++) {
-        var hour = parseInt(allEvents[i].time);
-        $(".eventTitle")[hour - 9].textContent = allEvents[i].title;
-        $('.hour')[hour - 9].dataset.hasEvent = 'true';
-        $('.calOver')[hour - 9].dataset.hasEvent = 'true';
-        $('.eventTitle')[hour - 9].dataset.hasEvent = 'true';
-        $('.eventTitle')[hour - 9].classList.add('eventStyle');
+        var hour = (parseInt(allEvents[i].time) - 9);
+        $(".eventTitle").eq(hour).text(allEvents[i].title);
+        $('.hour').eq(hour).data('event', true);
+        $('.calOver').eq(hour).data('event', true);
+        $('.eventTitle').eq(hour).data('event', true);
+        $('.eventTitle').eq(hour).addClass('eventStyle');
     }
 }
 
@@ -120,21 +115,22 @@ function saveEvent() {
 
 function delEvent() {
 
-    var eventHour = $('#hourSel').val();
+    var eventHour = ($('#hourSel').val() - 9);
 
     for (var i = 0; i < allEvents.length; i++) {
-        if (allEvents[i].time == eventHour) {
+        if (allEvents[i].time == (eventHour + 9)) {
             allEvents.splice(i, 1);
         }
     }
 
     localStorage.setItem("allEvents", JSON.stringify(allEvents));
 
-    $(".eventTitle")[eventHour - 9].textContent = '';
-    $('.hour')[eventHour - 9].dataset.hasEvent = 'false';
-    $('.calOver')[eventHour - 9].dataset.hasEvent = 'false';
-    $('.eventTitle')[eventHour - 9].dataset.hasEvent = 'false';
-    $('.eventTitle')[eventHour - 9].classList.remove('eventStyle');
+
+    titles.eq(eventHour).text('');
+    hours.eq(eventHour).data('event', false);
+    calOvers.eq(eventHour).data('event', false);
+    titles.eq(eventHour).data('event', false);
+    titles.eq(eventHour).removeClass('eventStyle');
 
     loadCal();
 }
@@ -217,10 +213,10 @@ $(document).ready(function() {
 
         M.FormSelect.init(sel);
 
-        if (this.dataset.hasEvent == "true") {
+        if ($(this).data('event') == true) {
 
             for (var i = 0; i < allEvents.length; i++) {
-                if (allEvents[i].time == this.dataset.hour) {
+                if (allEvents[i].time == $(this).data('hour')) {
                     $("#titleLabel").addClass('active');
                     $("#titleInput").val(allEvents[i].title);
                     $("#descLabel").addClass('active');
