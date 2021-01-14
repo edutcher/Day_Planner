@@ -1,4 +1,8 @@
 const workDate = $('#workingDate');
+const hours = $('.hour');
+const calOvers = $('.calOver');
+const titles = $(".eventTitle");
+
 
 var curHour = moment().hour();
 var prevHour = moment().hour();
@@ -48,35 +52,25 @@ function startClock() {
 
 function checkCalOverlays() {
     curHour = moment().hour();
+    //curHour = 12;
 
-    if ((curHour >= 9) && (curHour <= 17)) {
-        for (var i = 9; i <= 17; i++) {
-            if (curHour > i) {
-                $('.calOver')[i - 9].classList.add('calOverlay');
-            } else {
-                $('.calOver')[i - 9].classList.remove('calOverlay');
-            }
-            if (curHour === i) {
-                $('.hour')[i - 9].style.fontSize = '18px';
-                $('.hour')[i - 9].style.fontWeight = 'bold';
-            } else {
-                $('.hour')[i - 9].style.fontSize = '14px';
-                $('.hour')[i - 9].style.fontWeight = 'normal';
-            }
+    calOvers.each(function(i, el) {
+        if ($(this).data("hour") < curHour) {
+            $(this).addClass('calOverlay');
+        } else {
+            $(this).removeClass('calOverlay');
         }
-    } else if (curHour > 17) {
-        for (var i = 9; i <= 17; i++) {
-            $('.hour')[i - 9].style.fontSize = '14px';
-            $('.hour')[i - 9].style.fontWeight = 'normal';
-            $('.calOver')[i - 9].classList.add('calOverlay');
+    })
+
+    hours.each(function(i, el) {
+        if ($(this).data("hour") === curHour) {
+            $(this).css('font-size', '18px');
+            $(this).css('font-weight', 'bold');
+        } else {
+            $(this).css('font-size', '14px');
+            $(this).css('font-weight', 'normal');
         }
-    } else {
-        for (var i = 9; i <= 17; i++) {
-            $('.hour')[i - 9].style.fontSize = '14px';
-            $('.hour')[i - 9].style.fontWeight = 'normal';
-            $('.calOver')[i - 9].classList.remove('calOverlay');
-        }
-    }
+    })
 }
 
 function loadCal() {
@@ -126,8 +120,6 @@ function saveEvent() {
 
 function delEvent() {
 
-    console.log('huh?');
-
     var eventHour = $('#hourSel').val();
 
     for (var i = 0; i < allEvents.length; i++) {
@@ -135,8 +127,6 @@ function delEvent() {
             allEvents.splice(i, 1);
         }
     }
-
-    console.log(allEvents);
 
     localStorage.setItem("allEvents", JSON.stringify(allEvents));
 
@@ -156,6 +146,18 @@ $(document).ready(function() {
     var modal = M.Modal.init(mod);
     var sel = document.querySelectorAll('select');
     var select = M.FormSelect.init(sel);
+
+    hours.each(function(i, el) {
+        $(this).data("hour", i + 9);
+    })
+
+    calOvers.each(function(i, el) {
+        $(this).data("hour", i + 9);
+    })
+
+    titles.each(function(i, el) {
+        $(this).data("hour", i + 9);
+    })
 
     $('#clock').text(moment()._d.toLocaleTimeString());
 
@@ -209,11 +211,9 @@ $(document).ready(function() {
 
         $('#hourSel').find('option:selected').removeAttr('selected');
 
-        var ind = this.dataset.hour;
+        var ind2 = $(this).data("hour");
 
-        var opt = document.getElementById("sel" + ind);
-
-        opt.setAttribute('selected', 'selected');
+        $($('option').get(ind2 - 9)).attr('selected', 'selected');
 
         M.FormSelect.init(sel);
 
