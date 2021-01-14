@@ -110,6 +110,7 @@ function saveEvent() {
     $("#titleInput").val("");
     $("#eventDesc").val("");
 
+    M.toast({ html: 'Saved!' })
     loadCal();
 }
 
