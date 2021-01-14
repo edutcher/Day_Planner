@@ -200,11 +200,6 @@ $(document).ready(function() {
 
     $(".modal-trigger").click(function() {
         var sel = document.querySelectorAll('select');
-        $("#titleInput").val("");
-        $("#eventDesc").val("");
-        $('#delBtn').addClass('hidden');
-        $("#descLabel").removeClass('active');
-        $("#titleLabel").removeClass('active');
 
         $('#hourSel').find('option:selected').removeAttr('selected');
 
@@ -218,6 +213,7 @@ $(document).ready(function() {
 
             for (var i = 0; i < allEvents.length; i++) {
                 if (allEvents[i].time == $(this).data('hour')) {
+                    $('#eventHead').text('Edit Event');
                     $("#titleLabel").addClass('active');
                     $("#titleInput").val(allEvents[i].title);
                     $("#descLabel").addClass('active');
@@ -226,6 +222,13 @@ $(document).ready(function() {
                 }
             }
 
+        } else {
+            $('#eventHead').text('Add Event');
+            $("#titleInput").val("");
+            $("#eventDesc").val("");
+            $('#delBtn').addClass('hidden');
+            $("#descLabel").removeClass('active');
+            $("#titleLabel").removeClass('active');
         }
     })
 
