@@ -14,25 +14,25 @@ const themes = [{
     name: "beach",
     video: './assets/beach.mp4',
     color: "#00FFFF",
-    modal: "url(./assets/beach2.jpg)",
+    modal: "./assets/beach2.jpg",
     sideImage: "./assets/beach3.jpg"
 }, {
     name: "blossom",
     video: "./assets/blossom.mp4",
     color: "#ffb7c5",
-    modal: "url(./assets/cherry3.jpg)",
+    modal: "./assets/cherry3.jpg",
     sideImage: "./assets/cherry.jpg"
 }, {
     name: "waterfall",
     video: "./assets/waterfall.mp4",
     color: "#00CED1",
-    modal: "url(./assets/water1.jpg)",
+    modal: "./assets/water1.jpg",
     sideImage: "./assets/water2.jpg"
 }, {
     name: "enchanted",
     video: "./assets/enchanted.mp4",
     color: "#00c853",
-    modal: "url(./assets/enchanted1.jpg)",
+    modal: "./assets/enchanted1.jpg",
     sideImage: "./assets/enchanted2.jpg"
 }]
 
@@ -191,7 +191,7 @@ $(document).ready(function() {
 
 
         setTimeout(function() {
-            $('.modal').css('background-image', themes[curTheme].modal);
+            $('#modalImg').attr('src', themes[curTheme].modal);
             root.style.setProperty('--theme-color', themes[curTheme].color);
             $('#backVid').animate({ 'opacity': 1 });
             $('#sidebarImage').attr('src', themes[curTheme].sideImage);

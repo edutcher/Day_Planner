@@ -108,9 +108,9 @@
             <div class="modal-content">
                 <h3 id="eventHead" class="center-align">Add Event</h3>
                 <div class="row">
-                    <div class="col s1"></div>
-                    <div class="input-field col s2 text-darken-3 bold">
-                        <select id="hourSel" class="text-darken-3 bold">
+                    <div class="col s8">
+                        <div class="input-field col s2 text-darken-3 bold">
+                            <select id="hourSel" class="text-darken-3 bold">
                         <option id="sel9" class="text-darken-3  bold" value="9">9 AM</option>
                         <option id="sel10" class="text-darken-3  bold" value="10">10 AM</option>
                         <option id="sel11" class="text-darken-3  bold" value="11">11 AM</option>
@@ -121,15 +121,17 @@
                         <option id="sel16" class="text-darken-3  bold" value="16">4 PM</option>
                         <option id="sel17" class="text-darken-3  bold" value="17">5 PM</option>
                         </select>
-                        <label>Hour</label>
+                            <label>Hour</label>
+                        </div>
+                        <div class="input-field col s10">
+                            <i class="material-icons prefix">title</i>
+                            <input id="titleInput" type="text">
+                            <label id="titleLabel" for="titleInput">Title</label>
+                        </div>
                     </div>
-                    <div class="col s1"></div>
-                    <div class="input-field col s6">
-                        <i class="material-icons prefix">title</i>
-                        <input id="titleInput" type="text">
-                        <label id="titleLabel" for="titleInput">Title</label>
+                    <div class="col s4">
+                        <img id="modalImg" class="circle" src="./assets/cherry3.jpg" alt="">
                     </div>
-                    <div class="col s2"></div>
                 </div>
                 <div class="row">
                     <br>
@@ -142,10 +144,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <br><br><br><br><br><br><br>
+                    <br><br>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div id="eventFoot" class="modal-footer">
                 <a id="delBtn" href="javascript:delEvent()" class="modal-close btn red hidden">Delete</a>
                 <a id="saveBtn" href="javascript:saveEvent()" class="modal-close waves-effect waves-green btn green">Save</a>
             </div>

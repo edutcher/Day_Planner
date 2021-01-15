@@ -99,12 +99,13 @@
     font-weight: bold;
 }
 
-.modal {
+
+/* .modal {
     background-image: url(./cherry3.jpg);
     background-position: 30% 30%;
     background-size: cover;
     background-repeat: no-repeat;
-}
+} */
 
 .modal h3 {
     text-shadow: 2px 2px var(--theme-color);
@@ -113,6 +114,11 @@
 .modal option {
     font-size: 18px;
     font-weight: bold;
+}
+
+#modalImg {
+    height: 150px;
+    width: 250px;
 }
 
 #titleInput {
@@ -124,6 +130,10 @@
 #eventDesc {
     font-size: 20px;
     text-shadow: 2px 2px var(--theme-color);
+}
+
+#eventFoot {
+    background-color: var(--theme-color);
 }
 
 footer ul {
