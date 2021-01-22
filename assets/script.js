@@ -1,15 +1,15 @@
+// grab jquery references to various components
 const workDate = $('#workingDate');
 const hours = $('.hour');
 const calOvers = $('.calOver');
 const titles = $(".eventTitle");
 
-
+// global variables
 var curHour = moment().hour();
 var prevHour = moment().hour();
 var allEvents = [];
 
-var curTheme = 1;
-
+// theme info
 const themes = [{
     name: "beach",
     video: './assets/beach.mp4',
@@ -36,6 +36,7 @@ const themes = [{
     sideImage: "./assets/enchanted2.jpg"
 }]
 
+// Starts clock on page
 function startClock() {
     var interval = setInterval(() => {
         if (moment().hour() > prevHour) {
@@ -46,9 +47,9 @@ function startClock() {
     }, 1000)
 }
 
+// places overlays on past hours, bolds current hour
 function checkCalOverlays() {
     curHour = moment().hour();
-    // curHour = 12;
 
     calOvers.each(function(i, el) {
         if ($(this).data("hour") < curHour) {
@@ -69,6 +70,7 @@ function checkCalOverlays() {
     })
 }
 
+// loads overlays and events to calendar
 function loadCal() {
     checkCalOverlays()
 
@@ -95,13 +97,14 @@ function loadCal() {
     }
 }
 
+// saves new event to array and pushes to local storage
 function saveEvent() {
 
     var newEvent = {
         time: $("#hourSel").val(),
         title: $("#titleInput").val(),
         desc: $("#eventDesc").val()
-    }
+    };
 
     allEvents.push(newEvent);
 
@@ -110,10 +113,11 @@ function saveEvent() {
     $("#titleInput").val("");
     $("#eventDesc").val("");
 
-    M.toast({ html: 'Saved!' })
+    M.toast({ html: 'Saved!' });
     loadCal();
 }
 
+// deletes an event from the array and localstorage
 function delEvent() {
 
     var eventHour = ($('#hourSel').val() - 9);
@@ -126,6 +130,7 @@ function delEvent() {
 
     localStorage.setItem("allEvents", JSON.stringify(allEvents));
 
+    M.toast({ html: 'Deleted!' });
 
     titles.eq(eventHour).text('');
     hours.eq(eventHour).data('event', false);
@@ -136,6 +141,25 @@ function delEvent() {
     loadCal();
 }
 
+// change theme to chosen theme
+function setTheme() {
+    var root = document.documentElement;
+    $('#backVid').animate({ 'opacity': 0 })
+
+    setTimeout(function() {
+        $('#backVid').attr('src', themes[curTheme].video)
+    }, 350)
+
+
+    setTimeout(function() {
+        $('#modalImg').attr('src', themes[curTheme].modal);
+        root.style.setProperty('--theme-color', themes[curTheme].color);
+        $('#backVid').animate({ 'opacity': 1 });
+        $('#sidebarImage').attr('src', themes[curTheme].sideImage);
+    }, 400)
+}
+
+// when the page has finished loading, initialize all components, add event listeners, start the clock, and load the calendar
 $(document).ready(function() {
     var side = document.querySelector('.sidenav');
     var sideBar = M.Sidenav.init(side);
@@ -176,26 +200,16 @@ $(document).ready(function() {
     })
 
     $('#themeBtn').click(() => {
-        var root = document.documentElement;
+
         if (curTheme < themes.length - 1) {
             curTheme++;
         } else {
             curTheme = 0;
         }
 
-        $('#backVid').animate({ 'opacity': 0 })
+        localStorage.setItem("curTheme", curTheme);
 
-        setTimeout(function() {
-            $('#backVid').attr('src', themes[curTheme].video)
-        }, 350)
-
-
-        setTimeout(function() {
-            $('#modalImg').attr('src', themes[curTheme].modal);
-            root.style.setProperty('--theme-color', themes[curTheme].color);
-            $('#backVid').animate({ 'opacity': 1 });
-            $('#sidebarImage').attr('src', themes[curTheme].sideImage);
-        }, 400)
+        setTheme();
     })
 
     $(".modal-trigger").click(function() {
@@ -231,6 +245,13 @@ $(document).ready(function() {
             $("#titleLabel").removeClass('active');
         }
     })
+
+    if (localStorage.getItem("curTheme") != null) {
+        curTheme = localStorage.getItem("curTheme");
+        setTheme();
+    } else {
+        curTheme = 1;
+    }
 
     workDate.text(moment()._d.toDateString())
     startClock();

@@ -99,14 +99,6 @@
     font-weight: bold;
 }
 
-
-/* .modal {
-    background-image: url(./cherry3.jpg);
-    background-position: 30% 30%;
-    background-size: cover;
-    background-repeat: no-repeat;
-} */
-
 .modal h3 {
     text-shadow: 2px 2px var(--theme-color);
 }
