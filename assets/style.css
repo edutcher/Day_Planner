@@ -159,3 +159,12 @@ footer {
     height: 50px;
     z-index: 100;
 }
+
+@media (max-width: 890px) {
+    .hideSmall {
+        display: none;
+    }
+    #clock {
+        left: 30%;
+    }
+}
